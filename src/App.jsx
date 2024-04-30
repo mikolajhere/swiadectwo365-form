@@ -24,6 +24,7 @@ const INITIAL_DATA = {
   "dataValues[serviceDataArea]": "",
   "dataValues[serviceHomeType]": 390,
   "dataValues[serviceDataServiceDate]": "",
+  "dataValues[serviceClientClientHasFloorPlan]": "",
   dataUpdateEmail: "",
   docs: "",
   submit: 1,
@@ -51,12 +52,11 @@ export const App = () => {
     });
   }
 
-  const { isFirstStep, step, isSecondStep, isLastStep, next } =
-    UseMultistepForm([
-      <UserForm {...data} updateFields={updateFields} />,
-      <MoreInfo updateFields={updateFields} />,
-      <ThankYouForm {...data} updateFields={updateFields} />,
-    ]);
+  const { isFirstStep, step, isLastStep, next } = UseMultistepForm([
+    <UserForm key={1} {...data} updateFields={updateFields} />,
+    <MoreInfo key={2} updateFields={updateFields} />,
+    <ThankYouForm key={3} {...data} updateFields={updateFields} />,
+  ]);
 
   function onSubmit(e) {
     e.preventDefault();
@@ -64,13 +64,16 @@ export const App = () => {
     if (isFirstStep) {
       const formData = { ...data, ...hiddensObj };
       console.log({ formData });
-      fetch("https://system.pewnylokal.pl/crm/api/newEndpoint.php?format=json", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
+      fetch(
+        "https://system.pewnylokal.pl/crm/api/newEndpoint.php?format=json",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      )
         .then((response) => response.json())
         .then((data) => {
           setData({
@@ -94,13 +97,16 @@ export const App = () => {
       });
     } else if (!isLastStep) {
       console.log(data);
-      fetch("https://system.pewnylokal.pl/crm/api/updateClientData.php?format=json", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
+      fetch(
+        "https://system.pewnylokal.pl/crm/api/updateClientData.php?format=json",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      )
         .then((response) => {
           response.json();
         })
@@ -128,8 +134,7 @@ export const App = () => {
         <div className="container-info">
           <h2>Formularz kontaktowy</h2>
           <p>
-            Wypełnij nasz formularz kontaktowy - otrzymasz fachową pomoc,
-            dopasowaną do Twoich potrzeb!
+            Odpowiedz na kilka prostych pytań, a my skontaktujemy się z Tobą w celu ustalenia szczegółów.
           </p>
         </div>
         <form onSubmit={onSubmit}>
@@ -141,7 +146,7 @@ export const App = () => {
           ) : (
             <div className="btn-container">
               <button className="btn-main" type="submit">
-                {isFirstStep ? "Dalej" : "Wyślij"}
+                {isFirstStep ? "Dalej" : "Zamów"}
               </button>
             </div>
           )}{" "}
