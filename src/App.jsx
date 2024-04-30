@@ -74,7 +74,7 @@ export const App = () => {
           setData({
             clientHash: data.hash,
             submit: 1,
-            dataEmailTemplate: "odbiorywarszawa.pl.php",
+            dataEmailTemplate: "iswiadectwa.pl.php",
           });
           console.log("Endpoint Success: ", data);
         })
@@ -83,7 +83,7 @@ export const App = () => {
         });
       next();
       setData({
-        dataEmailTemplate: "odbiorywarszawa.pl.php",
+        dataEmailTemplate: "iswiadectwa.pl.php",
         clientHash: data.clientHash,
         submit: 1,
       });
@@ -120,7 +120,7 @@ export const App = () => {
   return (
     <>
       <nav>
-        <img src="/img/warszawa.svg" alt="logo odbiorów mieszkań warszawa" />
+        <img src="/logo.svg" alt="" />
       </nav>
       <div className="container">
         <div className="container-info">
