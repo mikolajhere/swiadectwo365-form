@@ -82,9 +82,6 @@ export const App = () => {
             dataEmailTemplate: "odbiorywarszawa.pl.php",
           });
           console.log("Endpoint Success: ", data);
-          gtag("event", "conversion", {
-            send_to: "AW-725933870/jm4tCM7Z9LMBEK6-k9oC",
-          });
         })
         .catch((error) => {
           console.error("Endpoint Error: ", error);
@@ -134,7 +131,8 @@ export const App = () => {
         <div className="container-info">
           <h2>Formularz kontaktowy</h2>
           <p>
-            Odpowiedz na kilka prostych pytań, a my skontaktujemy się z Tobą w celu ustalenia szczegółów.
+            Odpowiedz na kilka prostych pytań, a my skontaktujemy się z Tobą w
+            celu ustalenia szczegółów.
           </p>
         </div>
         <form onSubmit={onSubmit}>
