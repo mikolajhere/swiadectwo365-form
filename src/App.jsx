@@ -10,8 +10,8 @@ const INITIAL_DATA = {
   dataLog: "",
   dataPhone: "",
   dataEmailTemplate: "iswiadectwa.pl.php",
-  dataSMSTemplate: "iswiadectwa.pl.php", 
-  "dataValues[serviceDataType]": 574, 
+  dataSMSTemplate: "iswiadectwa.pl.php",
+  "dataValues[serviceDataType]": 574,
   "dataValues[serviceClientChannel]": 39,
   "dataValues[serviceDataAddressCityText]": "",
   "dataValues[serviceDataAddress]": "",
@@ -117,13 +117,17 @@ export const App = () => {
     }
   }
 
+  console.log({ step });
+
   return (
     <>
       <nav>
-        <img src="/logo.svg" alt="" />
+        <a href="/">
+          <img src="/logo.svg" alt="" />
+        </a>
       </nav>
-      <div className="container">
-        <div className="container-info">
+      <div className={`${step.key !== "1" ? "pt-0" : ""} container`}>
+        <div className={`${step.key === "1" ? "" : "d-none"} container-info`}>
           <h2>Formularz kontaktowy</h2>
           <p>
             Odpowiedz na kilka prostych pytań, a my skontaktujemy się z Tobą w

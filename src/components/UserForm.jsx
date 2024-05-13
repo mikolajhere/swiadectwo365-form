@@ -1,11 +1,6 @@
 import { FormWrapper } from "./FormWrapper";
 
-export function UserForm({
-  dataPhone,
-  updateFields,
-  serviceHomeType,
-  dataUpdateEmail,
-}) {
+export function UserForm({ dataPhone, updateFields, serviceHomeType }) {
   return (
     <FormWrapper title="Dane kontaktowe">
       <>
@@ -27,23 +22,6 @@ export function UserForm({
         </div>
 
         <div className="form-item">
-          <label className="legal-label" htmlFor="dataUpdateEmail">
-            E-mail (opcjonalnie)
-          </label>
-          <input
-            id="dataUpdateEmail"
-            type="email"
-            className="legal-input"
-            name="dataUpdateEmail"
-            value={dataUpdateEmail}
-            onChange={(e) =>
-              updateFields({
-                dataUpdateEmail: e.target.value,
-              })
-            }
-          />
-        </div>
-        <div className="form-item">
           <label className="legal-label" htmlFor="serviceHomeType">
             Typ nieruchomości
           </label>
@@ -51,8 +29,7 @@ export function UserForm({
             className="legal-input"
             id="serviceHomeType"
             name="serviceHomeType"
-            value={serviceHomeType}
-            required
+            value={serviceHomeType} 
             onChange={(e) =>
               updateFields({ "dataValues[serviceHomeType]": e.target.value })
             }

@@ -5,10 +5,28 @@ export function MoreInfo({
   updateFields,
   serviceDataAddress,
   serviceClientClientHasFloorPlan,
+  dataUpdateEmail,
 }) {
   return (
     <FormWrapper title="Dane kontaktowe">
       <>
+        <div className="form-item">
+          <label className="legal-label" htmlFor="dataUpdateEmail">
+            E-mail (opcjonalnie)
+          </label>
+          <input
+            id="dataUpdateEmail"
+            type="email"
+            className="legal-input"
+            name="dataUpdateEmail"
+            value={dataUpdateEmail}
+            onChange={(e) =>
+              updateFields({
+                dataUpdateEmail: e.target.value,
+              })
+            }
+          />
+        </div>
         <div className="form-item">
           <label className="legal-label" htmlFor="address">
             Adres
@@ -63,7 +81,7 @@ export function MoreInfo({
           >
             <option value="">Wybierz</option>
             <option value="590">Tak</option>
-            <option value="589">Nie</option> 
+            <option value="589">Nie</option>
           </select>
         </div>
       </>
