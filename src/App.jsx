@@ -9,8 +9,8 @@ import { MoreInfo } from "./components/MoreInfo";
 const INITIAL_DATA = {
   dataLog: "",
   dataPhone: "",
-  dataEmailTemplate: "iswiadectwa.pl.php",
-  dataSMSTemplate: "iswiadectwa.pl.php",
+  dataEmailTemplate: "swiadectwa365.pl.php",
+  dataSMSTemplate: "swiadectwa365.pl.php",
   "dataValues[serviceDataType]": 574,
   "dataValues[serviceClientChannel]": 39,
   "dataValues[serviceDataAddressCityText]": "",
@@ -74,7 +74,7 @@ export const App = () => {
           setData({
             clientHash: data.hash,
             submit: 1,
-            dataEmailTemplate: "iswiadectwa.pl.php",
+            dataEmailTemplate: "swiadectwa365.pl.php",
           });
           console.log("Endpoint Success: ", data);
         })
@@ -83,7 +83,7 @@ export const App = () => {
         });
       next();
       setData({
-        dataEmailTemplate: "iswiadectwa.pl.php",
+        dataEmailTemplate: "swiadectwa365.pl.php",
         clientHash: data.clientHash,
         submit: 1,
       });
