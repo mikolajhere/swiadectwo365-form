@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UseMultistepForm } from "./components/UseMultistepForm";
 import { UserForm } from "./components/UserForm";
 import { ThankYouForm } from "./components/ThankYouForm";
@@ -30,16 +30,27 @@ const INITIAL_DATA = {
 export const App = () => {
   const [data, setData] = useState(INITIAL_DATA);
 
-  useAddHiddenInputs("my-form", []);
+  // Callback function to update data state
+  const updateData = (newData) => {
+    setData((prevData) => ({
+      ...prevData,
+      ...newData,
+    }));
+  };
 
-  const hiddensObj = {};
+  useAddHiddenInputs("my-form", updateData);
 
-  setTimeout(() => {
-    const hiddens = document.querySelectorAll("input[type='hidden']");
-    hiddens.forEach((hidden) => {
-      hiddensObj[hidden.name] = hidden.value;
-    });
-  }, 1);
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const hash = urlParams.get("hash");
+    if (hash) {
+      setData((prevData) => ({
+        ...prevData,
+        clientHash: hash,
+      }));
+      next(); // Move to the next step if hash is present
+    }
+  }, []);
 
   function updateFields(fields) {
     setData((prev) => {
@@ -57,7 +68,7 @@ export const App = () => {
     e.preventDefault();
 
     if (isFirstStep) {
-      const formData = { ...data, ...hiddensObj };
+      const formData = { ...data };
       console.log({ formData });
       fetch(
         "https://system.pewnylokal.pl/crm/api/newEndpoint.php?format=json",
@@ -123,7 +134,7 @@ export const App = () => {
     <>
       <nav>
         <a href="/">
-          <img src="/logo.svg" alt="" />
+          <img src="logo.svg" alt="" />
         </a>
       </nav>
       <div className={`${step.key !== "1" ? "pt-0" : ""} container`}>
@@ -134,7 +145,7 @@ export const App = () => {
             celu ustalenia szczegółów.
           </p>
         </div>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} id="my-form">
           <div className="form-content">
             <div className="form-grid">{step}</div>
           </div>
