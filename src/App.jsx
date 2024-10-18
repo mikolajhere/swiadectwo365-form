@@ -48,6 +48,8 @@ export const App = () => {
         ...prevData,
         clientHash: hash,
       }));
+      window.pagesense = window.pagesense || [];
+      window.pagesense.push(["trackEvent", "leady swaidectwa365"]);
       next(); // Move to the next step if hash is present
     }
   }, []);
@@ -69,7 +71,6 @@ export const App = () => {
 
     if (isFirstStep) {
       const formData = { ...data };
-      console.log({ formData });
       fetch(
         "https://system.pewnylokal.pl/crm/api/newEndpoint.php?format=json",
         {
@@ -87,6 +88,8 @@ export const App = () => {
             submit: 1,
             dataEmailTemplate: "swiadectwa365.pl.php",
           });
+          window.pagesense = window.pagesense || [];
+          window.pagesense.push(["trackEvent", "leady swaidectwa365"]);
           console.log("Endpoint Success: ", data);
         })
         .catch((error) => {
@@ -99,7 +102,6 @@ export const App = () => {
         submit: 1,
       });
     } else if (!isLastStep) {
-      console.log(data);
       fetch(
         "https://system.pewnylokal.pl/crm/api/updateClientData.php?format=json",
         {
@@ -127,8 +129,6 @@ export const App = () => {
       });
     }
   }
-
-  console.log({ step });
 
   return (
     <>
